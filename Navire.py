@@ -1,4 +1,4 @@
-class navire:
+class Navire:
 
     def __init__(self, noNavire, nomNavire, libelleFret, qteFret):
         self._noNavire = noNavire,
@@ -17,6 +17,7 @@ class navire:
     ##Fonction estDecharge
     def estDecharge(self):
         return self._qteFret == 0
+        
 
     
         
