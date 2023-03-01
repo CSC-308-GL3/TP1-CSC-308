@@ -7,15 +7,15 @@ class Port:
 
     def dechargement(self, Navire):
         qteFret = Navire.obtenirQteFret()
-        zones = self.__tabStock.sort(reverse=True)
-        for zones in self.__tabStock:
-            if qteFret <= Stockage.obtenirCapaDispo():
-                Stockage.stocker(qteFret)
+        # zones = self.__tabStock.sort(reverse=True)
+        for stockage in self.__tabStock:
+            if qteFret <= stockage.obtenirCapaDispo():
+                stockage.stocker(qteFret)
                 Navire.decharger(qteFret)
                 qteFret = Navire.obtenirQteFret()
                 break
             else:
-                capaDispo = Stockage.obtenirCapaDispo()
-                Stockage.stocker(capaDispo)
+                capaDispo = stockage.obtenirCapaDispo()
+                stockage.stocker(capaDispo)
                 Navire.decharger(capaDispo)
                 qteFret = Navire.obtenirQteFret()
