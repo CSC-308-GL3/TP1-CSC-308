@@ -1,21 +1,22 @@
-from Navire import Navire
-from Stockage import Stockage
-
 class Port:
-    def __init__(self, tabStock):
-        self.__tabStock = tabStock
-
-    def dechargement(self, Navire):
-        qteFret = Navire.obtenirQteFret()
-        zones = self.__tabStock.sort(reverse=True)
-        for zones in self.__tabStock:
-            if qteFret <= Stockage.obtenirCapaDispo():
-                Stockage.stocker(qteFret)
-                Navire.decharger(qteFret)
-                qteFret = Navire.obtenirQteFret()
+    def __init__(self):
+        self.__tabStock = []
+    
+    def ajouteStockage(self, stockage):
+        self.__tabStock.append(stockage)
+    
+    def dechargement(self, navire):
+        qteRestante = navire.obtenirQteFret()
+        for stockage in self.__tabStock:
+            if qteRestante <= stockage.obtenirCapaDispo():
+                
+                stockage.stocker(qteRestante)
+                navire.decharger(qteRestante)
+                qteRestante = navire.obtenirQteFret()
                 break
             else:
-                capaDispo = Stockage.obtenirCapaDispo()
-                Stockage.stocker(capaDispo)
-                Navire.decharger(capaDispo)
-                qteFret = Navire.obtenirQteFret()
+                capaDispo = stockage.obtenirCapaDispo()
+                stockage.stocker(capaDispo)
+                navire.decharger(capaDispo)
+                qteRestante = navire.obtenirQteFret()
+            
